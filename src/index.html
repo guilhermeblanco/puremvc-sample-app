@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PureMVC-App Example</title>
+
+        <link rel="stylesheet" href="styles/employeeadmin.css" type="text/css" media="screen">
+
+        <!-- jQuery files -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="vendors/jquery.serializeJSON.js"></script>
+
+        <!-- PureMVC files -->
+        <script type="text/javascript" src="https://raw.github.com/guilhermeblanco/puremvc-js/master/puremvc.min.js"></script>
+
+        <!-- PureMVC-App files (non-minified) -->
+        <script type="text/javascript" src="scripts/base/ApplicationFacade.js"></script>
+
+        <script type="text/javascript" src="scripts/base/page/PageMacroCommand.js"></script>
+
+        <script type="text/javascript" src="scripts/base/widget/Command.js"></script>
+        <script type="text/javascript" src="scripts/base/widget/Mediator.js"></script>
+        <script type="text/javascript" src="scripts/base/widget/ViewComponent.js"></script>
+        <script type="text/javascript" src="scripts/base/widget/EntityProxy.js"></script>
+
+        <script type="text/javascript" src="scripts/base/widget/notifier/Command.js"></script>
+        <script type="text/javascript" src="scripts/base/widget/notifier/Mediator.js"></script>
+        <script type="text/javascript" src="scripts/base/widget/notifier/ViewComponent.js"></script>
+
+        <script type="text/javascript" src="scripts/employeeadmin/widget/user/form/Command.js"></script>
+        <script type="text/javascript" src="scripts/employeeadmin/widget/user/form/Mediator.js"></script>
+        <script type="text/javascript" src="scripts/employeeadmin/widget/user/form/ViewComponent.js"></script>
+
+        <script type="text/javascript" src="scripts/employeeadmin/widget/user/list/Command.js"></script>
+        <script type="text/javascript" src="scripts/employeeadmin/widget/user/list/Mediator.js"></script>
+        <script type="text/javascript" src="scripts/employeeadmin/widget/user/list/ViewComponent.js"></script>
+
+        <script type="text/javascript" src="scripts/employeeadmin/page/IndexStartupCommand.js"></script>
+    </head>
+
+    <body>
+        <form id="user-add">
+            <input type="hidden" name="user[id]" />
+
+            <dl>
+                <dt>Name:</dt>
+                <dd><input type="text" name="user[name]" /></dd>
+
+                <dt>Email</dt>
+                <dd><input type="text" name="user[email]" /></dd>
+            </dl>
+
+            <input type="submit" value="Create" />
+        </form>
+
+        <div id="user-list">
+            <script id="user-list-template" type="text/html">
+                <li>
+                    <a class="mailto" href="mailto:user@domain.com">User name</a>
+                    [<a class="remove_bt" href="#">Remove</a>]
+                </li>
+            </script>
+
+            <ul id="user-list-items"></ul>
+        </div>
+
+        <script type="text/javascript">
+            var facade    = new base.ApplicationFacade(),
+                $document = $(document);
+
+            $document.ready(function () {
+                facade.registerCommand('startup', employeeadmin.page.IndexStartupCommand);
+                facade.startup($document);
+            });
+
+        </script>
+    </body>
+</html>
